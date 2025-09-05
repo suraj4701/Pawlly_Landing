@@ -45,7 +45,7 @@ test("More Book Demo Call", async ({ page }) => {
         LinkLocator.click()
     ])
     const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://tidycal.com/iqonicdesign/pawlly-demo");
+    expect(newPageUrl).toBe("https://pawlly.iqonic.design/pawlly-demo-call/");
 });
 
 test("More Buy now", async ({ page }) => {

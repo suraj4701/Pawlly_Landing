@@ -287,7 +287,7 @@ test("Home Footer Docs", async ({ page }) => {
         LinkLocator.click()
     ])
     const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://apps.iqonic.design/documentation/pawlly-doc/build/");
+    expect(newPageUrl).toBe("https://documentation.iqonic.design/pawlly/");
 });
 
 test("Home Footer RoadMap", async ({ page }) => {
