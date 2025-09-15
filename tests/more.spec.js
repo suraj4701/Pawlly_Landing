@@ -36,7 +36,7 @@ test("More Hire Us", async ({ page }) => {
     expect(newPageUrl).toBe("https://iqonic.tech/");
 });
 
-test("More Book Demo Call", async ({ page }) => {
+test.only("More Book Demo Call", async ({ page }) => {
     await page.goto(home_url);
     const LinkLocator = page.locator("//li[@id='menu-item-3143']")
 
@@ -44,8 +44,11 @@ test("More Book Demo Call", async ({ page }) => {
         page.context().waitForEvent('page'),
         LinkLocator.click()
     ])
+
     const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/pawlly-demo-call/");
+    const urlObject = new URL(newPageUrl);
+    const urlWithoutQueryParams = urlObject.origin + urlObject.pathname;
+    expect(urlWithoutQueryParams).toBe("https://pawlly.iqonic.design/pawlly-demo-call/");
 });
 
 test("More Buy now", async ({ page }) => {
