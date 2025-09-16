@@ -36,7 +36,7 @@ test("More Hire Us", async ({ page }) => {
     expect(newPageUrl).toBe("https://iqonic.tech/");
 });
 
-test.only("More Book Demo Call", async ({ page }) => {
+test("More Book Demo Call", async ({ page }) => {
     await page.goto(home_url);
     const LinkLocator = page.locator("//li[@id='menu-item-3143']")
 
