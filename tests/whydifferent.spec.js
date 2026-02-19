@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
-import { TrustpilotVerify, UserAppAppstore, UserAppPlaystore } from './common';
+import { test } from '@playwright/test';
+import { CommonLinkVerify, TrustpilotVerify, UserAppAppstore, UserAppPlaystore } from './common';
 const home_url = process.env.HOME_URL;
 
 test("WhyDifferent ForDevelopers Trustpilot Verify", async ({ page }) => {
@@ -16,13 +16,8 @@ test("WhyDifferent ForDevelopers Flutter Apps", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1431']").click()
     const LinkLocator = page.locator("//a[contains(text(),'Flutter Apps')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/product/customer-app/");
+    const expectedLink = "https://pawlly.iqonic.design/product/customer-app/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("WhyDifferent ForDevelopers User App Playstore", async ({ page }) => {
@@ -49,13 +44,8 @@ test("WhyDifferent ForDevelopers custom development services", async ({ page }) 
     await page.locator("//li[@id='menu-item-1431']").click()
     const LinkLocator = page.locator("//a[contains(text(),'custom development services')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://iqonic.tech/");
+    const expectedLink = "https://iqonic.tech/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("WhyDifferent ForDevelopers tech support", async ({ page }) => {
@@ -64,13 +54,8 @@ test("WhyDifferent ForDevelopers tech support", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1431']").click()
     const LinkLocator = page.locator("//a[contains(text(),'tech support')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://iqonic.desky.support/");
+    const expectedLink = "https://iqonic.desky.support/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("WhyDifferent ForBusinessOwner Trustpilot Verify", async ({ page }) => {
@@ -87,13 +72,8 @@ test("WhyDifferent ForBusinessOwner Price", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1430']").click()
     const LinkLocator = page.locator("//a[contains(text(),'price')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/pricing/");
+    const expectedLink = "https://pawlly.iqonic.design/pricing/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("WhyDifferent ForBusinessOwner top-notch support", async ({ page }) => {
@@ -102,13 +82,8 @@ test("WhyDifferent ForBusinessOwner top-notch support", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1430']").click()
     const LinkLocator = page.locator("//a[contains(text(),'top-notch support')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://iqonic.desky.support/");
+    const expectedLink = "https://iqonic.desky.support/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("WhyDifferent ForBusinessOwner custom development services", async ({ page }) => {
@@ -117,11 +92,6 @@ test("WhyDifferent ForBusinessOwner custom development services", async ({ page 
     await page.locator("//li[@id='menu-item-1430']").click()
     const LinkLocator = page.locator("//a[contains(text(),'custom development services')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://service.iqonic.design/");
+    const expectedLink = "https://service.iqonic.design/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });

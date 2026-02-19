@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
-import { AdminPanelVerify, EnvantoPawllyVerify, TrustpilotVerify } from './common';
+import { test } from '@playwright/test';
+import { AdminPanelVerify, CommonLinkVerify, EnvantoPawllyVerify, TrustpilotVerify } from './common';
 const home_url = process.env.HOME_URL;
 
 test("Features Appointment Buy now", async ({ page }) => {
@@ -33,13 +33,8 @@ test("Features Appointment Overall Bookings Report", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1420']").click()
     const LinkLocator = page.locator("//a[contains(text(),'Overall Bookings Report')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/feature/reporting-for-pet-care-business/");
+    const expectedLink = "https://pawlly.iqonic.design/feature/reporting-for-pet-care-business/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Features Employee Management Buy now", async ({ page }) => {
@@ -73,13 +68,8 @@ test("Features Employee Management Employee Mobile App", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1419']").click()
     const LinkLocator = page.locator("//a[contains(text(),'Employee Mobile App')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/product/employee-app/");
+    const expectedLink = "https://pawlly.iqonic.design/product/employee-app/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Features Payment Buy now", async ({ page }) => {
@@ -113,13 +103,8 @@ test("Features Payment financial control", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1418']").click()
     const LinkLocator = page.locator("//a[contains(text(),'financial control')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/feature/financial-transactions-report/");
+    const expectedLink = "https://pawlly.iqonic.design/feature/financial-transactions-report/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Features Client Management Buy now", async ({ page }) => {
@@ -153,13 +138,8 @@ test("Features Client Management admin panel", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1417']").click()
     const LinkLocator = page.locator("//a[contains(text(),'admin panel')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/product/laravel-admin-panel/");
+    const expectedLink = "https://pawlly.iqonic.design/product/laravel-admin-panel/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Features Event Buy now", async ({ page }) => {
@@ -193,13 +173,8 @@ test("Features Event admin panel", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1416']").click()
     const LinkLocator = page.locator("//a[contains(text(),'admin panel')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/product/laravel-admin-panel/");
+    const expectedLink = "https://pawlly.iqonic.design/product/laravel-admin-panel/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Features Event  mobile app", async ({ page }) => {
@@ -208,13 +183,8 @@ test("Features Event  mobile app", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1416']").click()
     const LinkLocator = page.locator("//a[contains(text(),'mobile app')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/product/customer-app/");
+    const expectedLink = "https://pawlly.iqonic.design/product/customer-app/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Features Blog Buy now", async ({ page }) => {
@@ -248,13 +218,8 @@ test("Features Blog admin panel", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1415']").click()
     const LinkLocator = page.locator("//a[contains(text(),'admin panel')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/product/laravel-admin-panel/");
+    const expectedLink = "https://pawlly.iqonic.design/product/laravel-admin-panel/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Features Notification Buy now", async ({ page }) => {
@@ -288,13 +253,8 @@ test("Features Notification mobile app", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1414']").click()
     const LinkLocator = page.locator("//a[contains(text(),'mobile app')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/product/employee-app/");
+    const expectedLink = "https://pawlly.iqonic.design/product/employee-app/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Features Finances Buy now", async ({ page }) => {
@@ -328,13 +288,8 @@ test("Features Finances Employee members' earnings", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1413']").click()
     const LinkLocator = page.locator("//body[1]/div[2]/main[1]/div[1]/article[1]/div[1]/div[1]/div[5]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/p[1]/a[1]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/feature/employee-management/");
+    const expectedLink = "https://pawlly.iqonic.design/feature/employee-management/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Features Reporting Buy now", async ({ page }) => {
@@ -368,13 +323,8 @@ test("Features Reporting Booking Report", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1412']").click()
     const LinkLocator = page.locator("//a[contains(text(),'Booking Report')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/feature/appointment-booking-scheduling/");
+    const expectedLink = "https://pawlly.iqonic.design/feature/appointment-booking-scheduling/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Features Powerful Setting Panel Buy now", async ({ page }) => {
@@ -408,13 +358,8 @@ test("Features Powerful Setting Panel payment options", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1411']").click()
     const LinkLocator = page.locator("//a[contains(text(),'payment options')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/feature/multiple-payments-options/");
+    const expectedLink = "https://pawlly.iqonic.design/feature/multiple-payments-options/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Features Powerful Setting Panel notification", async ({ page }) => {
@@ -423,13 +368,8 @@ test("Features Powerful Setting Panel notification", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1411']").click()
     const LinkLocator = page.locator("//a[contains(text(),'notification')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/feature/real-time-notification/");
+    const expectedLink = "https://pawlly.iqonic.design/feature/real-time-notification/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Features E-Commerce Buy now", async ({ page }) => {
@@ -463,11 +403,6 @@ test("Features E-Commerce admin panel", async ({ page }) => {
     await page.locator("//li[@id='menu-item-2696']").click()
     const LinkLocator = page.locator("//a[contains(text(),'admin panel')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/product/laravel-admin-panel/");
+    const expectedLink = "https://pawlly.iqonic.design/product/laravel-admin-panel/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });

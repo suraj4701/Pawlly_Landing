@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
-import { AdminPanelVerify, EnvantoPawllyVerify } from './common';
+import { test } from '@playwright/test';
+import { AdminPanelVerify, CommonLinkVerify, EnvantoPawllyVerify } from './common';
 const home_url = process.env.HOME_URL;
 
 test("More Pricing Buy now", async ({ page }) => {
@@ -15,40 +15,22 @@ test("More Pricing Buy Service", async ({ page }) => {
     await page.locator("//li[@id='menu-item-2059']").click()
     const LinkLocator = page.locator("//a[contains(text(),'Buy Service')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://service.iqonic.design/services/pawlly-flutter-app-with-laravel-backend/");
+    const expectedLink = "https://service.iqonic.design/services/pawlly-flutter-app-with-laravel-backend/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("More Hire Us", async ({ page }) => {
     await page.goto(home_url);
     const LinkLocator = page.locator("//li[@id='menu-item-650']")
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://iqonic.tech/");
+    const expectedLink = "https://iqonic.tech/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("More Book Demo Call", async ({ page }) => {
     await page.goto(home_url);
     const LinkLocator = page.locator("//li[@id='menu-item-3143']")
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-
-    const newPageUrl = newPage.url();
-    const urlObject = new URL(newPageUrl);
-    const urlWithoutQueryParams = urlObject.origin + urlObject.pathname;
-    expect(urlWithoutQueryParams).toBe("https://pawlly.iqonic.design/pawlly-demo-call/");
+    const expectedLink = "https://pawlly.iqonic.design/pawlly-demo-call/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("More Buy now", async ({ page }) => {

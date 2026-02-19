@@ -73,7 +73,7 @@ const UserAppAppstore = async (page, locator) => {
     ])
     const newPageUrl = newPage.url();
     expect(newPageUrl).toBe("https://apps.apple.com/us/app/pawlly/id6458044939");
-    const trustpilotLocator = newPage.locator("//header/h1[1]");
+    const trustpilotLocator = newPage.locator("//h1[@class='svelte-1bm25t']");
     const verifytext = await trustpilotLocator.textContent();
     expect(verifytext).toContain('Pawlly');
     return newPage;
@@ -87,7 +87,7 @@ const EmployeeAppAppstore = async (page, locator) => {
     ])
     const newPageUrl = newPage.url();
     expect(newPageUrl).toBe("https://apps.apple.com/us/app/pawlly-for-employee/id6462849036");
-    const trustpilotLocator = newPage.locator("//header/h1[1]");
+    const trustpilotLocator = newPage.locator("//h1[@class='svelte-1bm25t']");
     const verifytext = await trustpilotLocator.textContent();
     expect(verifytext).toContain('Pawlly for Employee');
     return newPage;
@@ -101,8 +101,21 @@ const EnvantoPawllyVerify = async (page, locator) => {
     ])
     const iqonicDesignSpanLocator = newPage.locator("//body/div[1]/div[3]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/h1[1]");
     const verifytext = await iqonicDesignSpanLocator.textContent();
-    expect(verifytext).toContain('Pawlly - Multivendor Pet Care Business Software in Flutter + Laravel with ChatGPT');
+    expect(verifytext).toContain('Pawlly- Multivendor Pet Care Business App in Flutter & Laravel');
     return newPage;
 }
 
-module.exports = { TrustpilotVerify, EnvantoVerify, UserAppPlaystore, AdminPanelVerify, UserAppAppstore, EmployeeAppAppstore, EmployeeAppPlaystore, EnvantoPawllyVerify }
+const CommonLinkVerify = async (page, locator, link) => {
+
+    const [newPage] = await Promise.all([
+        page.context().waitForEvent('page'),
+        locator.click()
+    ])
+    const newPageUrl = newPage.url();
+    const urlObject = new URL(newPageUrl);
+    const urlWithoutQueryParams = urlObject.origin + urlObject.pathname;
+    expect(urlWithoutQueryParams).toBe(link);
+    return newPage;
+}
+
+module.exports = { TrustpilotVerify, EnvantoVerify, UserAppPlaystore, AdminPanelVerify, UserAppAppstore, EmployeeAppAppstore, EmployeeAppPlaystore, EnvantoPawllyVerify, CommonLinkVerify }

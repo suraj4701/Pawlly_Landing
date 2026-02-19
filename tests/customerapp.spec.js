@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
-import { EnvantoPawllyVerify, EnvantoVerify, TrustpilotVerify, UserAppPlaystore } from './common';
+import { test } from '@playwright/test';
+import { CommonLinkVerify, EnvantoPawllyVerify, EnvantoVerify, TrustpilotVerify, UserAppPlaystore } from './common';
 const home_url = process.env.HOME_URL;
 
 test("Product CustomerApp Trustpilot Verify", async ({ page }) => {
@@ -40,13 +40,8 @@ test("Product CustomerApp book appointments", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1428']").click()
     const LinkLocator = page.locator("//a[contains(text(),'book appointments')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/feature/appointment-booking-scheduling/");
+    const expectedLink = "https://pawlly.iqonic.design/feature/appointment-booking-scheduling/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Product CustomerApp View Demo 2", async ({ page }) => {
@@ -64,13 +59,8 @@ test("Product CustomerApp Grooming", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1428']").click()
     const LinkLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[6]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/p[1]/a[1]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/service/pet-grooming/");
+    const expectedLink = "https://pawlly.iqonic.design/service/pet-grooming/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Product CustomerApp Day Care", async ({ page }) => {
@@ -79,13 +69,8 @@ test("Product CustomerApp Day Care", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1428']").click()
     const LinkLocator = page.locator("//a[contains(text(),'Day Care')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/service/pet-daycare/");
+    const expectedLink = "https://pawlly.iqonic.design/service/pet-daycare/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Product CustomerApp View Demo 3", async ({ page }) => {

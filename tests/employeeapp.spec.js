@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
-import { EmployeeAppPlaystore, EnvantoPawllyVerify, EnvantoVerify, TrustpilotVerify } from './common';
+import { test } from '@playwright/test';
+import { CommonLinkVerify, EmployeeAppPlaystore, EnvantoPawllyVerify, EnvantoVerify, TrustpilotVerify } from './common';
 const home_url = process.env.HOME_URL;
 
 test("Product EmployeeApp Trustpilot Verify", async ({ page }) => {
@@ -40,13 +40,8 @@ test("Product EmployeeApp Customer Satisfaction", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1429']").click()
     const LinkLocator = page.locator("//a[contains(text(),'Customer Satisfaction')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/feature/client-management/");
+    const expectedLink = "https://pawlly.iqonic.design/feature/client-management/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Product EmployeeApp View Demo 2", async ({ page }) => {

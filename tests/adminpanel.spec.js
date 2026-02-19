@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
-import { AdminPanelVerify, EnvantoPawllyVerify, EnvantoVerify, TrustpilotVerify } from './common';
+import { test } from '@playwright/test';
+import { AdminPanelVerify, CommonLinkVerify, EnvantoPawllyVerify, EnvantoVerify, TrustpilotVerify } from './common';
 const home_url = process.env.HOME_URL;
 
 test("Product AdminPanel Trustpilot Verify", async ({ page }) => {
@@ -121,13 +121,8 @@ test("Product CustomerApp Finance Module", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1427']").click()
     const LinkLocator = page.locator("//a[contains(text(),'Finance Module')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/feature/financial-transactions-report/");
+    const expectedLink = "https://pawlly.iqonic.design/feature/financial-transactions-report/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Product AdminPanel View Demo 9", async ({ page }) => {

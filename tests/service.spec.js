@@ -1,5 +1,5 @@
-import { expect, test } from '@playwright/test';
-import { AdminPanelVerify, EnvantoPawllyVerify, TrustpilotVerify } from './common';
+import { test } from '@playwright/test';
+import { AdminPanelVerify, CommonLinkVerify, EnvantoPawllyVerify, TrustpilotVerify } from './common';
 const home_url = process.env.HOME_URL;
 
 test("Services Boarding Buy now", async ({ page }) => {
@@ -33,13 +33,8 @@ test("Services Boarding create bookings", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1421']").click()
     const LinkLocator = page.locator("//a[contains(text(),'create bookings')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/feature/appointment-booking-scheduling/");
+    const expectedLink = "https://pawlly.iqonic.design/feature/appointment-booking-scheduling/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Services Veterinary Buy now", async ({ page }) => {
@@ -73,13 +68,8 @@ test("Services Veterinary admin panel", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1425']").click()
     const LinkLocator = page.locator("//a[contains(text(),'admin panel')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/product/laravel-admin-panel/");
+    const expectedLink = "https://pawlly.iqonic.design/product/laravel-admin-panel/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Services Grooming Buy now", async ({ page }) => {
@@ -113,13 +103,8 @@ test("Services Grooming admin panel", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1423']").click()
     const LinkLocator = page.locator("//a[contains(text(),'admin panel')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/product/laravel-admin-panel/");
+    const expectedLink = "https://pawlly.iqonic.design/product/laravel-admin-panel/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Services Training Buy now", async ({ page }) => {
@@ -153,13 +138,8 @@ test("Services Training admin panel", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1424']").click()
     const LinkLocator = page.locator("//a[contains(text(),'admin panel')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/product/laravel-admin-panel/");
+    const expectedLink = "https://pawlly.iqonic.design/product/laravel-admin-panel/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Services Walking Buy now", async ({ page }) => {
@@ -193,13 +173,8 @@ test("Services Walking admin panel", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1426']").click()
     const LinkLocator = page.locator("//a[contains(text(),'admin panel')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/product/laravel-admin-panel/");
+    const expectedLink = "https://pawlly.iqonic.design/product/laravel-admin-panel/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Services DayCare Buy now", async ({ page }) => {
@@ -233,11 +208,6 @@ test("Services DayCare admin panel", async ({ page }) => {
     await page.locator("//li[@id='menu-item-1422']").click()
     const LinkLocator = page.locator("//a[contains(text(),'admin panel')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/product/laravel-admin-panel/");
+    const expectedLink = "https://pawlly.iqonic.design/product/laravel-admin-panel/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });

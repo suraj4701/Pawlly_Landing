@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { AdminPanelVerify, EmployeeAppAppstore, EmployeeAppPlaystore, EnvantoPawllyVerify, EnvantoVerify, TrustpilotVerify, UserAppAppstore, UserAppPlaystore } from './common';
+import { AdminPanelVerify, CommonLinkVerify, EmployeeAppAppstore, EmployeeAppPlaystore, EnvantoPawllyVerify, EnvantoVerify, TrustpilotVerify, UserAppAppstore, UserAppPlaystore } from './common';
 const home_url = process.env.HOME_URL;
 
 test("Home Trustpilot Verify", async ({ page }) => {
@@ -65,26 +65,16 @@ test("Home Explore Pawlly for Developer", async ({ page }) => {
     await page.goto(home_url);
     const LinkLocator = page.locator("//a[contains(text(),'Explore Pawlly for Developer')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/pet-sitting-software-for-developers/");
+    const expectedLink = "https://pawlly.iqonic.design/pet-sitting-software-for-developers/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Home Explore Pawlly for Owners", async ({ page }) => {
     await page.goto(home_url);
     const LinkLocator = page.locator("//a[contains(text(),'Explore Pawlly for Owners')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/pet-sitting-software-for-business-owners/");
+    const expectedLink = "https://pawlly.iqonic.design/pet-sitting-software-for-business-owners/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Home Buy now", async ({ page }) => {
@@ -98,13 +88,8 @@ test("Home Buy Service", async ({ page }) => {
     await page.goto(home_url);
     const LinkLocator = page.locator("//a[contains(text(),'Buy Service')]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://service.iqonic.design/services/pawlly-flutter-app-with-laravel-backend/");
+    const expectedLink = "https://service.iqonic.design/services/pawlly-flutter-app-with-laravel-backend/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Home Buy now 2", async ({ page }) => {
@@ -125,48 +110,32 @@ test("Facebook link verify", async ({ page }) => {
     await page.goto(home_url);
     const facebookLinkLocator = page.locator("//body/div[@id='main-container']/footer[@id='footer']/div[1]/div[1]/article[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/ul[1]/li[1]/a[1]");
     await facebookLinkLocator.scrollIntoViewIfNeeded()
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        facebookLinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://www.facebook.com/iqonicdesign");
+    const expectedLink = "https://www.facebook.com/iqonicdesign";
+    await CommonLinkVerify(page, facebookLinkLocator, expectedLink);
 })
 
 test("YouTube link verify", async ({ page }) => {
     await page.goto(home_url);
     const facebookLinkLocator = page.locator("//body/div[@id='main-container']/footer[@id='footer']/div[1]/div[1]/article[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/ul[1]/li[2]/a[1]");
     await facebookLinkLocator.scrollIntoViewIfNeeded()
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        facebookLinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://www.youtube.com/c/IqonicDesign");
+    const expectedLink = "https://www.youtube.com/c/IqonicDesign";
+    await CommonLinkVerify(page, facebookLinkLocator, expectedLink);
 })
 
 test("X Twitter link verify", async ({ page }) => {
     await page.goto(home_url);
     const facebookLinkLocator = page.locator("//body/div[@id='main-container']/footer[@id='footer']/div[1]/div[1]/article[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/ul[1]/li[3]/a[1]");
     await facebookLinkLocator.scrollIntoViewIfNeeded()
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        facebookLinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://x.com/iqonicdesign");
+    const expectedLink = "https://x.com/iqonicdesign";
+    await CommonLinkVerify(page, facebookLinkLocator, expectedLink);
 })
 
 test("Instagram link verify", async ({ page }) => {
     await page.goto(home_url);
     const facebookLinkLocator = page.locator("//body/div[@id='main-container']/footer[@id='footer']/div[1]/div[1]/article[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/ul[1]/li[4]/a[1]");
     await facebookLinkLocator.scrollIntoViewIfNeeded()
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        facebookLinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://www.instagram.com/iqonicdesign/");
+    const expectedLink = "https://www.instagram.com/iqonicdesign/";
+    await CommonLinkVerify(page, facebookLinkLocator, expectedLink);
 })
 
 test("Home Footer Admin Panel", async ({ page }) => {
@@ -203,104 +172,64 @@ test("Home Footer Boarding", async ({ page }) => {
     await page.goto(home_url);
     const LinkLocator = page.locator("//body/div[@id='main-container']/footer[@id='footer']/div[1]/div[1]/article[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/section[1]/div[1]/div[3]/div[1]/div[2]/div[1]/ul[1]/li[1]/a[1]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/service/pet-boarding/");
+    const expectedLink = "https://pawlly.iqonic.design/service/pet-boarding/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Home Footer Veterinary", async ({ page }) => {
     await page.goto(home_url);
     const LinkLocator = page.locator("//body/div[@id='main-container']/footer[@id='footer']/div[1]/div[1]/article[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/section[1]/div[1]/div[3]/div[1]/div[2]/div[1]/ul[1]/li[2]/a[1]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/service/pet-veterinary/");
+    const expectedLink = "https://pawlly.iqonic.design/service/pet-veterinary/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Home Footer Grooming", async ({ page }) => {
     await page.goto(home_url);
     const LinkLocator = page.locator("//body/div[@id='main-container']/footer[@id='footer']/div[1]/div[1]/article[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/section[1]/div[1]/div[3]/div[1]/div[2]/div[1]/ul[1]/li[3]/a[1]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/service/pet-grooming/");
+    const expectedLink = "https://pawlly.iqonic.design/service/pet-grooming/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Home Footer Traning", async ({ page }) => {
     await page.goto(home_url);
     const LinkLocator = page.locator("//body/div[@id='main-container']/footer[@id='footer']/div[1]/div[1]/article[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/section[1]/div[1]/div[3]/div[1]/div[2]/div[1]/ul[1]/li[4]/a[1]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/service/pet-training/");
+    const expectedLink = "https://pawlly.iqonic.design/service/pet-training/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Home Footer Walking", async ({ page }) => {
     await page.goto(home_url);
     const LinkLocator = page.locator("//body/div[@id='main-container']/footer[@id='footer']/div[1]/div[1]/article[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/section[1]/div[1]/div[3]/div[1]/div[2]/div[1]/ul[1]/li[5]/a[1]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/service/pet-walking/");
+    const expectedLink = "https://pawlly.iqonic.design/service/pet-walking/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Home Footer DayCare", async ({ page }) => {
     await page.goto(home_url);
     const LinkLocator = page.locator("//body/div[@id='main-container']/footer[@id='footer']/div[1]/div[1]/article[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/section[1]/div[1]/div[3]/div[1]/div[2]/div[1]/ul[1]/li[6]/a[1]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/service/pet-daycare/");
+    const expectedLink = "https://pawlly.iqonic.design/service/pet-daycare/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Home Footer Docs", async ({ page }) => {
     await page.goto(home_url);
     const LinkLocator = page.locator("//body/div[@id='main-container']/footer[@id='footer']/div[1]/div[1]/article[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/section[1]/div[1]/div[4]/div[1]/div[2]/div[1]/ul[1]/li[1]/a[1]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://documentation.iqonic.design/pawlly/");
+    const expectedLink = "https://documentation.iqonic.design/pawlly/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Home Footer RoadMap", async ({ page }) => {
     await page.goto(home_url);
     const LinkLocator = page.locator("//body/div[@id='main-container']/footer[@id='footer']/div[1]/div[1]/article[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/section[1]/div[1]/div[4]/div[1]/div[2]/div[1]/ul[1]/li[2]/a[1]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/roadmap/");
+    const expectedLink = "https://pawlly.iqonic.design/roadmap/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Home Footer Video", async ({ page }) => {
@@ -322,26 +251,16 @@ test("Home Footer FAQ", async ({ page }) => {
     await page.goto(home_url);
     const LinkLocator = page.locator("//body/div[@id='main-container']/footer[@id='footer']/div[1]/div[1]/article[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/section[1]/div[1]/div[4]/div[1]/div[2]/div[1]/ul[1]/li[4]/a[1]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://pawlly.iqonic.design/faq/");
+    const expectedLink = "https://pawlly.iqonic.design/faq/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Home Footer Support", async ({ page }) => {
     await page.goto(home_url);
     const LinkLocator = page.locator("//body/div[@id='main-container']/footer[@id='footer']/div[1]/div[1]/article[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/section[1]/div[1]/div[5]/div[1]/div[2]/div[1]/ul[1]/li[1]/a[1]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://iqonic.desky.support/");
+    const expectedLink = "https://iqonic.desky.support/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Home Footer Pricing", async ({ page }) => {
@@ -358,39 +277,24 @@ test("Home Footer Get A Quote", async ({ page }) => {
     await page.goto(home_url);
     const LinkLocator = page.locator("//body/div[@id='main-container']/footer[@id='footer']/div[1]/div[1]/article[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/section[1]/div[1]/div[5]/div[1]/div[2]/div[1]/ul[1]/li[3]/a[1]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://iqonic.tech/ai-cost-calculator/");
+    const expectedLink = "https://iqonic.tech/software-development-cost-calculator/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Home Footer License", async ({ page }) => {
     await page.goto(home_url);
     const LinkLocator = page.locator("//body/div[@id='main-container']/footer[@id='footer']/div[1]/div[1]/article[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/section[1]/div[1]/div[5]/div[1]/div[2]/div[1]/ul[1]/li[4]/a[1]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://iqonic.design/licensing-terms-more/");
+    const expectedLink = "https://iqonic.design/licensing-terms-more/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Home Footer hire Us", async ({ page }) => {
     await page.goto(home_url);
     const LinkLocator = page.locator("//body/div[@id='main-container']/footer[@id='footer']/div[1]/div[1]/article[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/section[1]/div[1]/div[5]/div[1]/div[2]/div[1]/ul[1]/li[5]/a[1]");
     await LinkLocator.scrollIntoViewIfNeeded();
-
-    const [newPage] = await Promise.all([
-        page.context().waitForEvent('page'),
-        LinkLocator.click()
-    ])
-    const newPageUrl = newPage.url();
-    expect(newPageUrl).toBe("https://iqonic.tech/");
+    const expectedLink = "https://iqonic.tech/";
+    await CommonLinkVerify(page, LinkLocator, expectedLink);
 });
 
 test("Home Footer Iqonic Design", async ({ page }) => {
