@@ -2,212 +2,190 @@ import { test } from '@playwright/test';
 import { AdminPanelVerify, CommonLinkVerify, EnvantoPawllyVerify, TrustpilotVerify } from './common';
 const home_url = process.env.HOME_URL;
 
-test("Services Boarding Buy now", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1421']").click()
-    const EnvantoKivicareVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/a[1]");
-    await EnvantoKivicareVerifyLocator.scrollIntoViewIfNeeded();
-    await EnvantoPawllyVerify(page, EnvantoKivicareVerifyLocator);
-})
+test.describe("Services", () => {
 
-test("Services Boarding Explore Pawlly", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1421']").click()
-    const Locator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/a[1]");
-    await AdminPanelVerify(page, Locator);
-})
+    test.beforeEach(async ({ page }) => {
+        await page.goto(home_url);
+        await page.locator("//li[@id='menu-item-645']").hover();
+    });
 
-test("Services Boarding Trustpilot Verify", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1421']").click()
-    const TrustpilotVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/a[1]");
-    await TrustpilotVerify(page, TrustpilotVerifyLocator);
-})
+    // --- SUB-SECTION: Boarding ---
+    test.describe("Boarding", () => {
+        test.beforeEach(async ({ page }) => {
+            await page.locator("//li[@id='menu-item-1421']").click();
+        });
 
-test("Services Boarding create bookings", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1421']").click()
-    const LinkLocator = page.locator("//a[contains(text(),'create bookings')]");
-    await LinkLocator.scrollIntoViewIfNeeded();
-    const expectedLink = "https://pawlly.iqonic.design/feature/appointment-booking-scheduling/";
-    await CommonLinkVerify(page, LinkLocator, expectedLink);
-});
+        test("Buy now", async ({ page }) => {
+            const EnvantoKivicareVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/a[1]");
+            await EnvantoKivicareVerifyLocator.scrollIntoViewIfNeeded();
+            await EnvantoPawllyVerify(page, EnvantoKivicareVerifyLocator);
+        });
 
-test("Services Veterinary Buy now", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1425']").click()
-    const EnvantoKivicareVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/a[1]");
-    await EnvantoKivicareVerifyLocator.scrollIntoViewIfNeeded();
-    await EnvantoPawllyVerify(page, EnvantoKivicareVerifyLocator);
-})
+        test("Explore Pawlly", async ({ page }) => {
+            const Locator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/a[1]");
+            await AdminPanelVerify(page, Locator);
+        });
 
-test("Services Veterinary Explore Pawlly", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1425']").click()
-    const Locator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/a[1]");
-    await AdminPanelVerify(page, Locator);
-})
+        test("Trustpilot Verify", async ({ page }) => {
+            const TrustpilotVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/a[1]");
+            await TrustpilotVerify(page, TrustpilotVerifyLocator);
+        });
 
-test("Services Veterinary Trustpilot Verify", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1425']").click()
-    const TrustpilotVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/a[1]");
-    await TrustpilotVerify(page, TrustpilotVerifyLocator);
-})
+        test("create bookings", async ({ page }) => {
+            const LinkLocator = page.locator("//a[contains(text(),'create bookings')]");
+            await LinkLocator.scrollIntoViewIfNeeded();
+            const expectedLink = "https://pawlly.iqonic.design/feature/appointment-booking-scheduling/";
+            await CommonLinkVerify(page, LinkLocator, expectedLink);
+        });
+    });
 
-test("Services Veterinary admin panel", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1425']").click()
-    const LinkLocator = page.locator("//a[contains(text(),'admin panel')]");
-    await LinkLocator.scrollIntoViewIfNeeded();
-    const expectedLink = "https://pawlly.iqonic.design/product/laravel-admin-panel/";
-    await CommonLinkVerify(page, LinkLocator, expectedLink);
-});
+    // --- SUB-SECTION: Veterinary ---
+    test.describe("Veterinary", () => {
+        test.beforeEach(async ({ page }) => {
+            await page.locator("//li[@id='menu-item-1425']").click();
+        });
 
-test("Services Grooming Buy now", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1423']").click()
-    const EnvantoKivicareVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/a[1]");
-    await EnvantoKivicareVerifyLocator.scrollIntoViewIfNeeded();
-    await EnvantoPawllyVerify(page, EnvantoKivicareVerifyLocator);
-})
+        test("Buy now", async ({ page }) => {
+            const EnvantoKivicareVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/a[1]");
+            await EnvantoKivicareVerifyLocator.scrollIntoViewIfNeeded();
+            await EnvantoPawllyVerify(page, EnvantoKivicareVerifyLocator);
+        });
 
-test("Services Grooming Explore Pawlly", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1423']").click()
-    const Locator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/a[1]");
-    await AdminPanelVerify(page, Locator);
-})
+        test("Explore Pawlly", async ({ page }) => {
+            const Locator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/a[1]");
+            await AdminPanelVerify(page, Locator);
+        });
 
-test("Services Grooming Trustpilot Verify", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1423']").click()
-    const TrustpilotVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/a[1]");
-    await TrustpilotVerify(page, TrustpilotVerifyLocator);
-})
+        test("Trustpilot Verify", async ({ page }) => {
+            const TrustpilotVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/a[1]");
+            await TrustpilotVerify(page, TrustpilotVerifyLocator);
+        });
 
-test("Services Grooming admin panel", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1423']").click()
-    const LinkLocator = page.locator("//a[contains(text(),'admin panel')]");
-    await LinkLocator.scrollIntoViewIfNeeded();
-    const expectedLink = "https://pawlly.iqonic.design/product/laravel-admin-panel/";
-    await CommonLinkVerify(page, LinkLocator, expectedLink);
-});
+        test("admin panel", async ({ page }) => {
+            const LinkLocator = page.locator("//a[contains(text(),'admin panel')]");
+            await LinkLocator.scrollIntoViewIfNeeded();
+            const expectedLink = "https://pawlly.iqonic.design/product/laravel-admin-panel/";
+            await CommonLinkVerify(page, LinkLocator, expectedLink);
+        });
+    });
 
-test("Services Training Buy now", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1424']").click()
-    const EnvantoKivicareVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/a[1]");
-    await EnvantoKivicareVerifyLocator.scrollIntoViewIfNeeded();
-    await EnvantoPawllyVerify(page, EnvantoKivicareVerifyLocator);
-})
+    // --- SUB-SECTION: Grooming ---
+    test.describe("Grooming", () => {
+        test.beforeEach(async ({ page }) => {
+            await page.locator("//li[@id='menu-item-1423']").click();
+        });
 
-test("Services Training Explore Pawlly", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1424']").click()
-    const Locator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/a[1]");
-    await AdminPanelVerify(page, Locator);
-})
+        test("Buy now", async ({ page }) => {
+            const EnvantoKivicareVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/a[1]");
+            await EnvantoKivicareVerifyLocator.scrollIntoViewIfNeeded();
+            await EnvantoPawllyVerify(page, EnvantoKivicareVerifyLocator);
+        });
 
-test("Services Training Trustpilot Verify", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1424']").click()
-    const TrustpilotVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/a[1]");
-    await TrustpilotVerify(page, TrustpilotVerifyLocator);
-})
+        test("Explore Pawlly", async ({ page }) => {
+            const Locator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/a[1]");
+            await AdminPanelVerify(page, Locator);
+        });
 
-test("Services Training admin panel", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1424']").click()
-    const LinkLocator = page.locator("//a[contains(text(),'admin panel')]");
-    await LinkLocator.scrollIntoViewIfNeeded();
-    const expectedLink = "https://pawlly.iqonic.design/product/laravel-admin-panel/";
-    await CommonLinkVerify(page, LinkLocator, expectedLink);
-});
+        test("Trustpilot Verify", async ({ page }) => {
+            const TrustpilotVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/a[1]");
+            await TrustpilotVerify(page, TrustpilotVerifyLocator);
+        });
 
-test("Services Walking Buy now", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1426']").click()
-    const EnvantoKivicareVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/a[1]");
-    await EnvantoKivicareVerifyLocator.scrollIntoViewIfNeeded();
-    await EnvantoPawllyVerify(page, EnvantoKivicareVerifyLocator);
-})
+        test("admin panel", async ({ page }) => {
+            const LinkLocator = page.locator("//a[contains(text(),'admin panel')]");
+            await LinkLocator.scrollIntoViewIfNeeded();
+            const expectedLink = "https://pawlly.iqonic.design/product/laravel-admin-panel/";
+            await CommonLinkVerify(page, LinkLocator, expectedLink);
+        });
+    });
 
-test("Services Walking Explore Pawlly", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1426']").click()
-    const Locator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/a[1]");
-    await AdminPanelVerify(page, Locator);
-})
+    // --- SUB-SECTION: Training ---
+    test.describe("Training", () => {
+        test.beforeEach(async ({ page }) => {
+            await page.locator("//li[@id='menu-item-1424']").click();
+        });
 
-test("Services Walking Trustpilot Verify", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1426']").click()
-    const TrustpilotVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/a[1]");
-    await TrustpilotVerify(page, TrustpilotVerifyLocator);
-})
+        test("Buy now", async ({ page }) => {
+            const EnvantoKivicareVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/a[1]");
+            await EnvantoKivicareVerifyLocator.scrollIntoViewIfNeeded();
+            await EnvantoPawllyVerify(page, EnvantoKivicareVerifyLocator);
+        });
 
-test("Services Walking admin panel", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1426']").click()
-    const LinkLocator = page.locator("//a[contains(text(),'admin panel')]");
-    await LinkLocator.scrollIntoViewIfNeeded();
-    const expectedLink = "https://pawlly.iqonic.design/product/laravel-admin-panel/";
-    await CommonLinkVerify(page, LinkLocator, expectedLink);
-});
+        test("Explore Pawlly", async ({ page }) => {
+            const Locator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/a[1]");
+            await AdminPanelVerify(page, Locator);
+        });
 
-test("Services DayCare Buy now", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1422']").click()
-    const EnvantoKivicareVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/a[1]");
-    await EnvantoKivicareVerifyLocator.scrollIntoViewIfNeeded();
-    await EnvantoPawllyVerify(page, EnvantoKivicareVerifyLocator);
-})
+        test("Trustpilot Verify", async ({ page }) => {
+            const TrustpilotVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/a[1]");
+            await TrustpilotVerify(page, TrustpilotVerifyLocator);
+        });
 
-test("Services DayCare Explore Pawlly", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1422']").click()
-    const Locator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/a[1]");
-    await AdminPanelVerify(page, Locator);
-})
+        test("admin panel", async ({ page }) => {
+            const LinkLocator = page.locator("//a[contains(text(),'admin panel')]");
+            await LinkLocator.scrollIntoViewIfNeeded();
+            const expectedLink = "https://pawlly.iqonic.design/product/laravel-admin-panel/";
+            await CommonLinkVerify(page, LinkLocator, expectedLink);
+        });
+    });
 
-test("Services DayCare Trustpilot Verify", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1422']").click()
-    const TrustpilotVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/a[1]");
-    await TrustpilotVerify(page, TrustpilotVerifyLocator);
-})
+    // --- SUB-SECTION: Walking ---
+    test.describe("Walking", () => {
+        test.beforeEach(async ({ page }) => {
+            await page.locator("//li[@id='menu-item-1426']").click();
+        });
 
-test("Services DayCare admin panel", async ({ page }) => {
-    await page.goto(home_url);
-    await page.locator("//li[@id='menu-item-645']").hover()
-    await page.locator("//li[@id='menu-item-1422']").click()
-    const LinkLocator = page.locator("//a[contains(text(),'admin panel')]");
-    await LinkLocator.scrollIntoViewIfNeeded();
-    const expectedLink = "https://pawlly.iqonic.design/product/laravel-admin-panel/";
-    await CommonLinkVerify(page, LinkLocator, expectedLink);
+        test("Buy now", async ({ page }) => {
+            const EnvantoKivicareVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/a[1]");
+            await EnvantoKivicareVerifyLocator.scrollIntoViewIfNeeded();
+            await EnvantoPawllyVerify(page, EnvantoKivicareVerifyLocator);
+        });
+
+        test("Explore Pawlly", async ({ page }) => {
+            const Locator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/a[1]");
+            await AdminPanelVerify(page, Locator);
+        });
+
+        test("Trustpilot Verify", async ({ page }) => {
+            const TrustpilotVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/a[1]");
+            await TrustpilotVerify(page, TrustpilotVerifyLocator);
+        });
+
+        test("admin panel", async ({ page }) => {
+            const LinkLocator = page.locator("//a[contains(text(),'admin panel')]");
+            await LinkLocator.scrollIntoViewIfNeeded();
+            const expectedLink = "https://pawlly.iqonic.design/product/laravel-admin-panel/";
+            await CommonLinkVerify(page, LinkLocator, expectedLink);
+        });
+    });
+
+    // --- SUB-SECTION: DayCare ---
+    test.describe("DayCare", () => {
+        test.beforeEach(async ({ page }) => {
+            await page.locator("//li[@id='menu-item-1422']").click();
+        });
+
+        test("Buy now", async ({ page }) => {
+            const EnvantoKivicareVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/a[1]");
+            await EnvantoKivicareVerifyLocator.scrollIntoViewIfNeeded();
+            await EnvantoPawllyVerify(page, EnvantoKivicareVerifyLocator);
+        });
+
+        test("Explore Pawlly", async ({ page }) => {
+            const Locator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/a[1]");
+            await AdminPanelVerify(page, Locator);
+        });
+
+        test("Trustpilot Verify", async ({ page }) => {
+            const TrustpilotVerifyLocator = page.locator("//body/div[@id='main-container']/main[@id='main']/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/article[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/a[1]");
+            await TrustpilotVerify(page, TrustpilotVerifyLocator);
+        });
+
+        test("admin panel", async ({ page }) => {
+            const LinkLocator = page.locator("//a[contains(text(),'admin panel')]");
+            await LinkLocator.scrollIntoViewIfNeeded();
+            const expectedLink = "https://pawlly.iqonic.design/product/laravel-admin-panel/";
+            await CommonLinkVerify(page, LinkLocator, expectedLink);
+        });
+    });
 });
