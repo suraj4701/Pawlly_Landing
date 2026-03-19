@@ -73,7 +73,7 @@ const UserAppAppstore = async (page, locator) => {
     ])
     const newPageUrl = newPage.url();
     expect(newPageUrl).toBe("https://apps.apple.com/us/app/pawlly/id6458044939");
-    const trustpilotLocator = newPage.locator("//h1[@class='svelte-1bm25t']");
+    const trustpilotLocator = newPage.locator("//h1[normalize-space()='Pawlly']");
     const verifytext = await trustpilotLocator.textContent();
     expect(verifytext).toContain('Pawlly');
     return newPage;
@@ -87,7 +87,7 @@ const EmployeeAppAppstore = async (page, locator) => {
     ])
     const newPageUrl = newPage.url();
     expect(newPageUrl).toBe("https://apps.apple.com/us/app/pawlly-for-employee/id6462849036");
-    const trustpilotLocator = newPage.locator("//h1[@class='svelte-1bm25t']");
+    const trustpilotLocator = newPage.locator("//h1[normalize-space()='Pawlly for Employee']");
     const verifytext = await trustpilotLocator.textContent();
     expect(verifytext).toContain('Pawlly for Employee');
     return newPage;
